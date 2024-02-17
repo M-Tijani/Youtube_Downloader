@@ -1,42 +1,17 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap");
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@layer components {
+  .menu_button {
+    @apply py-4 px-10 flex flex-col hover:bg-100 rounded-md shadow-md text-lg text-center text-100 hover:text-white font-semibold duration-200 ease-in-out;
   }
-  to {
-    transform: rotate(360deg);
+  .button_style {
+    @apply bg-blue-400 py-2 px-4 rounded-md shadow-md text-lg text-center hover:text-100 text-white font-semibold duration-200 ease-in-out;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .text_style {
+    @apply hover:text-blue-400 duration-200;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
