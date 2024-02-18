@@ -9,9 +9,15 @@
     @apply py-4 px-10 flex flex-col hover:bg-100 rounded-md shadow-md text-lg text-center text-100 hover:text-white font-semibold duration-200 ease-in-out;
   }
   .button_style {
-    @apply bg-blue-400 py-2 px-4 rounded-md shadow-md text-lg text-center hover:text-100 text-white font-semibold duration-200 ease-in-out;
+    @apply hover:bg-101 hover:text-white bg-white text-100 py-2 px-4 rounded-md shadow-md text-lg text-center  font-semibold duration-200 ease-in-out;
   }
   .text_style {
-    @apply hover:text-blue-400 duration-200;
+    @apply hover:text-blue-400  duration-200;
+  }
+  .box-holder {
+    @apply container mx-auto my-10 max-w-[500px] gap-3 rounded-lg bg-200 flex flex-col items-center justify-center py-4 px-8;
+  }
+  .input_style {
+    @apply border-none outline-none bg-300 py-2 px-4 rounded-full ring-0 focus:ring-2 ring-100 duration-200 ease-in-out;
   }
 }
