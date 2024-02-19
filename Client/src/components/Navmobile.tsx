@@ -2,13 +2,14 @@ import { Link } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { DropdownMenu } from "@radix-ui/themes";
 import { Button } from "@radix-ui/themes";
+import Logo from "/src/assets/Tubeload White.png";
 
 function navbar_mobile() {
   return (
     <header className="flex items-center justify-between px-4 py-4 bg-100 text-white">
       <div>
         <Link className="text-2xl font-semibold" to="/">
-          LOGO
+          <img src={Logo} alt="" />
         </Link>
       </div>
       <div className="">
