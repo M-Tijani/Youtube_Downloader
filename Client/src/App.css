@@ -18,10 +18,10 @@
     @apply container mx-auto my-10 max-w-[500px] gap-3 rounded-lg bg-200 flex flex-col items-center justify-center py-4 px-8;
   }
   .input_style {
-    @apply border-none outline-none placeholder:text-slate-700 bg-300 py-2 px-4 rounded-full ring-0 focus:ring-2 ring-100 duration-200 ease-in-out;
+    @apply border-none outline-none placeholder:text-slate-700 bg-300 py-2 px-4 rounded-lg ring-0 focus:ring-2 ring-100 duration-200 ease-in-out;
   }
   .login_input {
-    @apply bg-100 px-12 rounded-lg text-white font-medium hover:text-100 hover:bg-white duration-200 shadow-xl py-2;
+    @apply bg-100 px-10 rounded-lg text-white font-medium hover:text-100 hover:bg-white duration-200 shadow-xl py-2;
   }
   .login_links {
     @apply hover:text-100 text-sm hover:underline duration-200;

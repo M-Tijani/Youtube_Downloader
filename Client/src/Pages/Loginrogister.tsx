@@ -5,12 +5,18 @@ function Loginrogister() {
 
   return (
     <>
-      <main className="box-holder max-w-[350px] py-8 w-full flex flex-col gap-3">
-        <div className="w-full flex items-center justify-center gap-2">
-          <button onClick={() => setTrigger(true)} className="login_input">
+      <main className="box-holder duration-200 max-w-[350px] md:max-w-[500px] py-8 w-full flex flex-col gap-3">
+        <div className="flex items-center justify-center gap-2">
+          <button
+            onClick={() => setTrigger(true)}
+            className="login_input md:px-[55px]"
+          >
             LOGIN
           </button>
-          <button onClick={() => setTrigger(false)} className="login_input">
+          <button
+            onClick={() => setTrigger(false)}
+            className="login_input md:px-[55px]"
+          >
             REGISTER
           </button>
         </div>

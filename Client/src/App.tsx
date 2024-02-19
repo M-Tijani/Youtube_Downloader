@@ -6,8 +6,20 @@ import Howtouse from "./Pages/Howtouse";
 import Contact from "./Pages/Contact";
 import Loginrogister from "./Pages/Loginrogister";
 import Forgetpass from "./Pages/Forgetpass";
+// import { tsParticles } from "@tsparticles/engine";
 
 function App() {
+  // tsParticles.load({
+  //   id: "tsparticles",
+  //   options: [
+  //     {
+  //       preset: "fireworks",
+  //     },
+  //     {
+  //       /* other options here */
+  //     },
+  //   ],
+  // });
   return (
     <>
       <BrowserRouter>
