@@ -1,4 +1,5 @@
 import { NavLink, Link } from "react-router-dom";
+import Logo from "/src/assets/Tubeload White.png";
 function Navpc() {
   return (
     <>
@@ -6,7 +7,7 @@ function Navpc() {
         <div className="w-full flex py-4 px-10 items-center justify-around bg-100">
           <div>
             <NavLink className="text-2xl text-white font-semibold" to="/">
-              LOGO
+              <img src={Logo} alt="" />
             </NavLink>
           </div>
           <div className="text-white font-medium flex gap-8">

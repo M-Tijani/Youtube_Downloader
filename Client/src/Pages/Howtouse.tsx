@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import "../Css/howtouse.css"
+import { useEffect, useState } from "react";
+import "../Css/howtouse.css";
 
 interface headermodel {
   header: {
@@ -17,9 +17,9 @@ function Howtouse() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api');
+        const response = await fetch("http://localhost:3000/api");
         if (!response.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error("Failed to fetch data");
         }
 
         const result = await response.json();
@@ -27,7 +27,7 @@ function Howtouse() {
 
         setheader(result);
       } catch (error) {
-        console.log('Error fetching data:');
+        console.log("Error fetching data:");
       }
     };
 
@@ -35,34 +35,34 @@ function Howtouse() {
   }, []);
 
   return (
-    <div className='howtouse'>
-      <div className='howtouseheader'>
+    <>
+      <div className="howtouse">
+        <div className="howtouseheader">
+          {list_header ? (
+            list_header.header.map((itm, i) => (
+              <>
+                <h1 className="title">1. {itm.title}</h1>
+                <h1 className="subtitle">{itm.subtitle}</h1>
+                <h1 className="desc">{itm.first_description}</h1>
 
-        {list_header ? (
-          list_header.header.map((itm, i) => (
-            <>
-              <h1 className='title'>1. {itm.title}</h1>
-              <h1 className='subtitle'>{itm.subtitle}</h1>
-              <h1 className='desc'>{itm.first_description}</h1>
-              
-              {itm.steps.map((step , i)=>(
-                <>
-                <h2>Step {i+1} :</h2>
-                <ul>
-                  <li key={i}>{step}</li>
-                </ul>
-                </>
-                
-              ))}
-              
-              <h1 className='desc'>{itm.second_description}</h1>
-            </>
-          ))
-        ) : (
-          <p>Loading...</p>
-        )}
+                {itm.steps.map((step, i) => (
+                  <>
+                    <h2>Step {i + 1} :</h2>
+                    <ul>
+                      <li key={i}>{step}</li>
+                    </ul>
+                  </>
+                ))}
+
+                <h1 className="desc">{itm.second_description}</h1>
+              </>
+            ))
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
