@@ -6,6 +6,9 @@ import Howtouse from "./Pages/Howtouse";
 import Contact from "./Pages/Contact";
 import Loginrogister from "./Pages/Loginrogister";
 import Forgetpass from "./Pages/Forgetpass";
+import Privacypolicy from "./Pages/Privacypolicy";
+import Termsofuse from "./Pages/Termsofuse";
+import Copyrights from "./Pages/Copyrights";
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
             <Route path="contact" element={<Contact />} />
             <Route path="Login-or-register" element={<Loginrogister />} />
             <Route path="forget-password" element={<Forgetpass />} />
+            <Route path="Privacy-policy" element={<Privacypolicy />} />
+            <Route path="Terms-of-use" element={<Termsofuse />} />
+            <Route path="Copyrights" element={<Copyrights />} />
           </Route>
         </Routes>
       </BrowserRouter>

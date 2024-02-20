@@ -1,28 +1,31 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import '../Css/Loginrogister.css'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../Css/Loginrogister.css";
 
 function Loginrogister() {
   const [trigger, setTrigger] = useState(false);
-  const [name_register, setname_register] = useState('');
-  const [email_register, setemail_register] = useState('');
-  const [password_register, setpassword_register] = useState('');
-  const [passwordconfirmation_register, setpasswordconfirmation_register] = useState('');
-  const [errormsg , seterrormsg] = useState('');
+  const [name_register, setname_register] = useState("");
+  const [email_register, setemail_register] = useState("");
+  const [password_register, setpassword_register] = useState("");
+  const [passwordconfirmation_register, setpasswordconfirmation_register] =
+    useState("");
+  const [errormsg, seterrormsg] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
-  const handlePassword = (e) =>{
+  const handlePassword = (e: { target: { value: any } }) => {
     const newPassword = e.target.value;
 
-    const ulstrenthli = document.querySelector('.liverifypas');
-    if(newPassword === ""){
-      ulstrenthli.style.display='none';
+    const ulstrenthli = document.querySelector(".liverifypas") as HTMLElement;
+    if (ulstrenthli) {
+      if (newPassword === "") {
+        ulstrenthli.style.display = "none";
+      } else {
+        ulstrenthli.style.display = "grid";
+      }
     }
-    else{
-      ulstrenthli.style.display='grid';
-    }
+
     setpassword_register(newPassword);
 
     // Perform password strength checks
@@ -32,20 +35,36 @@ function Loginrogister() {
     const hasUppercase = /[A-Z]/.test(newPassword);
 
     // Update the UI to indicate password strength
-    const passwordStrengthMessages = document.querySelectorAll('.liverifypas li');
+    if (ulstrenthli) {
+      const passwordStrengthMessages = ulstrenthli.querySelectorAll("li");
 
-    passwordStrengthMessages[0].classList.toggle('verifypas-checked', hasNumber);
-    passwordStrengthMessages[1].classList.toggle('verifypas-checked', hasSymbol);
-    passwordStrengthMessages[2].classList.toggle('verifypas-checked', hasLowercase);
-    passwordStrengthMessages[3].classList.toggle('verifypas-checked', hasUppercase);
-
-  }
+      passwordStrengthMessages[0].classList.toggle(
+        "verifypas-checked",
+        hasNumber
+      );
+      passwordStrengthMessages[1].classList.toggle(
+        "verifypas-checked",
+        hasSymbol
+      );
+      passwordStrengthMessages[2].classList.toggle(
+        "verifypas-checked",
+        hasLowercase
+      );
+      passwordStrengthMessages[3].classList.toggle(
+        "verifypas-checked",
+        hasUppercase
+      );
+    }
+  };
 
   useEffect(() => {
     // Function to check if all list items have the 'verifypas-checked' class
     const areAllChecked = () => {
-      const passwordStrengthMessages = document.querySelectorAll('.liverifypas li');
-      return Array.from(passwordStrengthMessages).every(li => li.classList.contains('verifypas-checked'));
+      const passwordStrengthMessages =
+        document.querySelectorAll(".liverifypas li");
+      return Array.from(passwordStrengthMessages).every((li) =>
+        li.classList.contains("verifypas-checked")
+      );
     };
 
     // Check if all criteria are met and update isPasswordValid state
@@ -54,68 +73,62 @@ function Loginrogister() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [password_register]);
 
-  const register = async (e) => {
+  const register = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-      
-  if(passwordconfirmation_register === password_register){
-    seterrormsg('');
-  }
-  else {
-    seterrormsg('Password Not match');
-    return;
-  }
+    if (passwordconfirmation_register === password_register) {
+      seterrormsg("");
+    } else {
+      seterrormsg("Password Not match");
+      return;
+    }
 
     const requestOptions = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(
-        {
-          nm: name_register,
-          eml: email_register,
-          ps: password_register
-        }
-      ),
-    }
+      body: JSON.stringify({
+        nm: name_register,
+        eml: email_register,
+        ps: password_register,
+      }),
+    };
 
     try {
-      const response  = await fetch('http://localhost:3000/register', requestOptions)
+      const response = await fetch(
+        "http://localhost:3000/register",
+        requestOptions
+      );
       const data = await response.json();
 
-        if(response.ok){
-          if(data.newregister){
-            toast.success('registration successful', {
-              position: "bottom-right",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              progress: undefined,
-              theme: "light",
-              });
-              seterrormsg('');
-
-          }else{
-            toast.error('Email Exists, Try with other email', {
-              position: "bottom-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-              });
-          }
+      if (response.ok) {
+        if (data.newregister) {
+          toast.success("registration successful", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            progress: undefined,
+            theme: "light",
+          });
+          seterrormsg("");
+        } else {
+          toast.error("Email Exists, Try with other email", {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
-        
-
-
+      }
     } catch (error) {
-      console.error('Error:' + error);
+      console.error("Error:" + error);
     }
   };
-
 
   return (
     <>
@@ -154,7 +167,9 @@ function Loginrogister() {
                   placeholder="Password"
                   required
                 />
-                <button type="submit" className="login_input">LOGIN</button>
+                <button type="submit" className="login_input">
+                  LOGIN
+                </button>
                 <div>
                   <Link className="login_links" to="/forget-password">
                     Forget Password?
@@ -164,21 +179,27 @@ function Loginrogister() {
             </form>
           )}
           {!trigger && (
-            <form onSubmit={register}
-              className="w-full max-w-[350px] flex flex-col gap-3">
+            <form
+              onSubmit={register}
+              className="w-full max-w-[350px] flex flex-col gap-3"
+            >
               <div className="w-full max-w-[350px] flex flex-col gap-3">
                 <input
                   className="input_style "
                   type="text"
                   placeholder="Username"
-                  onChange={(e) => { setname_register(e.target.value) }}
+                  onChange={(e) => {
+                    setname_register(e.target.value);
+                  }}
                   required
                 />
                 <input
                   className="input_style "
                   type="email"
                   placeholder="Email"
-                  onChange={(e) => { setemail_register(e.target.value) }}
+                  onChange={(e) => {
+                    setemail_register(e.target.value);
+                  }}
                   required
                 />
                 <input
@@ -189,24 +210,31 @@ function Loginrogister() {
                   required
                 />
                 <>
-                <ul className="liverifypas">
-                  <li className="verifypas1">One number</li>
-                  <li className="verifypas2">One symbol</li>
-                  <li className="verifypas3">One lowercase letter</li>
-                  <li className="verifypas3">One uppercase letter</li>
-                </ul>
+                  <ul className="liverifypas grid grid-cols-2 gap-2 text-sm">
+                    <li className="verifypas1">
+                      Minimum number of characters is 6.
+                    </li>
+                    <li className="verifypas2">One symbol</li>
+                    <li className="verifypas3">One lowercase letter</li>
+                    <li className="verifypas3">One uppercase letter</li>
+                  </ul>
                 </>
-                
+
                 <input
                   className="input_style "
                   type="password"
                   placeholder="Confirm Password"
-                  onChange={(e) => { setpasswordconfirmation_register(e.target.value) }}
-
+                  onChange={(e) => {
+                    setpasswordconfirmation_register(e.target.value);
+                  }}
                   required
                 />
-                {errormsg && <p style={{ color: 'red' , fontSize : '12px' }}>{errormsg}</p>}
-                <button disabled={!isPasswordValid} className="login_input">REGISTER</button>
+                {errormsg && (
+                  <p style={{ color: "red", fontSize: "12px" }}>{errormsg}</p>
+                )}
+                <button disabled={!isPasswordValid} className="login_input">
+                  REGISTER
+                </button>
 
                 <ToastContainer
                   position="top-right"
@@ -219,7 +247,7 @@ function Loginrogister() {
                   draggable
                   pauseOnHover
                   theme="light"
-                  />
+                />
 
                 <div className="flex items-center justify-between">
                   <Link className="login_links" to="/forget-password">
@@ -227,7 +255,8 @@ function Loginrogister() {
                   </Link>
                   <button
                     className="login_links"
-                    onClick={() => setTrigger(true)}>
+                    onClick={() => setTrigger(true)}
+                  >
                     ?already have account
                   </button>
                 </div>
