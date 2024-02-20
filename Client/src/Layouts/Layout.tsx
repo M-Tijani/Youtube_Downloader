@@ -7,11 +7,13 @@ import Footer from "../Pages/Footer";
 function Layout() {
   return (
     <Theme>
-      <Header />
-      <main>
-        <Outlet />
+      <main className="app">
+        <Header />
+        <main>
+          <Outlet />
+        </main>
+        <Footer />
       </main>
-      <Footer />
     </Theme>
   );
 }
