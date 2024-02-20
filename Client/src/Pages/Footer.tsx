@@ -4,12 +4,12 @@ function Footer() {
   return (
     <>
       <main className="mt-auto bottom-0 right-0 left-0 bg-100">
-        <div className="grid grid-cols-1 md:grid-cols-2 justify-items-start text-white gap-2 my-5 mx-5">
-          <div className="flex flex-col gap-2 mx-10 text-justify">
-            <Link className="text-2xl font-semibold" to="/">
+        <div className="flex flex-col items-start justify-start text-white gap-2 my-4 mx-10 / md:flex-row md:items-center md:justify-center md:gap-4 md:my-8 md:mx-16">
+          <div className="flex flex-col gap-2 ">
+            <Link className="text-2xl font-semibold " to="/">
               <img src={Logo} alt="" />
             </Link>
-            <p>
+            <p className="md:text-sm md:max-w-[400px]">
               With Tubeload's YouTube converter, you can easily transform your
               favorite YouTube videos into high-quality mp3 or mp4 files.
               Whether you want to enjoy music on the go or save videos for
@@ -17,7 +17,7 @@ function Footer() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-1 mx-10">
+          <div className="flex flex-col gap-1 ">
             <h1 className="text-xl font-semibold ">LINKS</h1>
             <Link className="login_links hover:text-50" to="Privacy-policy">
               Privacy policy
