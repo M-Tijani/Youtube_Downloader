@@ -11,39 +11,41 @@ function Loginrogister() {
   const [name_register, setname_register] = useState("");
   const [email_register, setemail_register] = useState("");
   const [password_register, setpassword_register] = useState("");
-  const [passwordconfirmation_register, setpasswordconfirmation_register] =
-    useState("");
+  const [passwordconfirmation_register, setpasswordconfirmation_register] =useState("");
   const [errormsg, seterrormsg] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const [password, setPassword] = useState("");
-  const [type, setType] = useState("password");
-  const [icon, setIcon] = useState(eyeOff);
+  const [typepslogin, settypepslogin] = useState("password");
+  const [typepsresig, settypepsresig] = useState("password");
+  const [typepsConfirmresig, settypepsConfirmresig] = useState("password");
+  const [iconpslogin, setpslogin] = useState(eyeOff);
+  const [iconpsresig, setpsresig] = useState(eyeOff);
+  const [iconpsConfirmresig, setpsConfirmresig] = useState(eyeOff);
 
   const handleToggle1 = () => {
-    if (type === "password") {
-      setIcon(eye);
-      setType("text");
+    if (typepslogin === "password") {
+      setpslogin(eye);
+      settypepslogin("text");
     } else {
-      setIcon(eyeOff);
-      setType("password");
+      setpslogin(eyeOff);
+      settypepslogin("password");
     }
   };
   const handleToggle2 = () => {
-    if (type === "password") {
-      setIcon(eye);
-      setType("text");
+    if (typepsresig === "password") {
+      setpsresig(eye);
+      settypepsresig("text");
     } else {
-      setIcon(eyeOff);
-      setType("password");
+      setpsresig(eyeOff);
+      settypepsresig("password");
     }
   };
   const handleToggle3 = () => {
-    if (type === "password") {
-      setIcon(eye);
-      setType("text");
+    if (typepsConfirmresig === "password") {
+      setpsConfirmresig(eye);
+      settypepsConfirmresig("text");
     } else {
-      setIcon(eyeOff);
-      setType("password");
+      setpsConfirmresig(eyeOff);
+      settypepsConfirmresig("password");
     }
   };
   const handlePassword = (e: { target: { value: any } }) => {
@@ -196,10 +198,10 @@ function Loginrogister() {
                 <div className="relative w-full max-w-[350px] flex flex-col gap-3">
                   <input
                     className="input_style"
-                    type={type}
+                    type={typepslogin}
                     name="password"
                     placeholder="Password"
-                    value={password}
+                    
                     onChange={(e) => setPassword(e.target.value)}
                     autoComplete="current-password"
                   />
@@ -209,7 +211,7 @@ function Loginrogister() {
                   >
                     <Icon
                       className="absolute top-[7px] right-[15px]"
-                      icon={icon}
+                      icon={iconpslogin}
                       size={20}
                     />
                   </span>
@@ -252,10 +254,9 @@ function Loginrogister() {
                 <div className="relative w-full max-w-[350px] flex flex-col gap-3">
                   <input
                     className="input_style "
-                    type={type}
+                    type={typepsresig}
                     name="password"
                     placeholder="Password"
-                    value={password}
                     autoComplete="current-password"
                     onChange={handlePassword}
                     required
@@ -266,7 +267,7 @@ function Loginrogister() {
                   >
                     <Icon
                       className="absolute top-[7px] right-[15px]"
-                      icon={icon}
+                      icon={iconpsresig}
                       size={20}
                     />
                   </span>
@@ -285,10 +286,9 @@ function Loginrogister() {
                 <div className="relative w-full max-w-[350px] flex flex-col gap-3">
                   <input
                     className="input_style "
-                    type={type}
+                    type={typepsConfirmresig}
                     name="password"
                     placeholder="Confirm Password"
-                    value={password}
                     autoComplete="current-password"
                     onChange={(e) => {
                       setpasswordconfirmation_register(e.target.value);
@@ -301,7 +301,7 @@ function Loginrogister() {
                   >
                     <Icon
                       className="absolute top-[7px] right-[15px]"
-                      icon={icon}
+                      icon={iconpsConfirmresig}
                       size={20}
                     />
                   </span>
