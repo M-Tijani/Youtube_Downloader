@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../Css/Loginrogister.css";
+import { Icon } from "react-icons-kit";
+import { eyeOff } from "react-icons-kit/feather/eyeOff";
+import { eye } from "react-icons-kit/feather/eye";
 
 function Loginrogister() {
   const [trigger, setTrigger] = useState(false);
@@ -13,7 +15,37 @@ function Loginrogister() {
     useState("");
   const [errormsg, seterrormsg] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [password, setPassword] = useState("");
+  const [type, setType] = useState("password");
+  const [icon, setIcon] = useState(eyeOff);
 
+  const handleToggle1 = () => {
+    if (type === "password") {
+      setIcon(eye);
+      setType("text");
+    } else {
+      setIcon(eyeOff);
+      setType("password");
+    }
+  };
+  const handleToggle2 = () => {
+    if (type === "password") {
+      setIcon(eye);
+      setType("text");
+    } else {
+      setIcon(eyeOff);
+      setType("password");
+    }
+  };
+  const handleToggle3 = () => {
+    if (type === "password") {
+      setIcon(eye);
+      setType("text");
+    } else {
+      setIcon(eyeOff);
+      setType("password");
+    }
+  };
   const handlePassword = (e: { target: { value: any } }) => {
     const newPassword = e.target.value;
 
@@ -161,12 +193,27 @@ function Loginrogister() {
                   placeholder="Email"
                   required
                 />
-                <input
-                  className="input_style max-w-[350px]"
-                  type="password"
-                  placeholder="Password"
-                  required
-                />
+                <div className="relative w-full max-w-[350px] flex flex-col gap-3">
+                  <input
+                    className="input_style"
+                    type={type}
+                    name="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="current-password"
+                  />
+                  <span
+                    className="flex justify-around items-center"
+                    onClick={handleToggle1}
+                  >
+                    <Icon
+                      className="absolute top-[7px] right-[15px]"
+                      icon={icon}
+                      size={20}
+                    />
+                  </span>
+                </div>
                 <button type="submit" className="login_input">
                   LOGIN
                 </button>
@@ -202,37 +249,71 @@ function Loginrogister() {
                   }}
                   required
                 />
-                <input
-                  className="input_style "
-                  type="txt"
-                  placeholder="Password"
-                  onChange={handlePassword}
-                  required
-                />
+                <div className="relative w-full max-w-[350px] flex flex-col gap-3">
+                  <input
+                    className="input_style "
+                    type={type}
+                    name="password"
+                    placeholder="Password"
+                    value={password}
+                    autoComplete="current-password"
+                    onChange={handlePassword}
+                    required
+                  />
+                  <span
+                    className="flex justify-around items-center"
+                    onClick={handleToggle2}
+                  >
+                    <Icon
+                      className="absolute top-[7px] right-[15px]"
+                      icon={icon}
+                      size={20}
+                    />
+                  </span>
+                </div>
+
                 <>
-                  <ul className="liverifypas grid grid-cols-2 gap-2 text-sm">
-                    <li className="verifypas1">
-                      Minimum number of characters is 6.
+                  <ul className="liverifypas grid grid-cols-1 gap-1 text-sm ml-2 duration-200">
+                    <li className="verifypas1">Should contain numbers.</li>
+                    <li className="verifypas2">
+                      Should contain symbol characters.
                     </li>
-                    <li className="verifypas2">One symbol</li>
-                    <li className="verifypas3">One lowercase letter</li>
-                    <li className="verifypas3">One uppercase letter</li>
+                    <li className="verifypas3">Should contain lowercase.</li>
+                    <li className="verifypas3">Should contain uppercase.</li>
                   </ul>
                 </>
+                <div className="relative w-full max-w-[350px] flex flex-col gap-3">
+                  <input
+                    className="input_style "
+                    type={type}
+                    name="password"
+                    placeholder="Confirm Password"
+                    value={password}
+                    autoComplete="current-password"
+                    onChange={(e) => {
+                      setpasswordconfirmation_register(e.target.value);
+                    }}
+                    required
+                  />
+                  <span
+                    className="flex justify-around items-center"
+                    onClick={handleToggle3}
+                  >
+                    <Icon
+                      className="absolute top-[7px] right-[15px]"
+                      icon={icon}
+                      size={20}
+                    />
+                  </span>
+                </div>
 
-                <input
-                  className="input_style "
-                  type="password"
-                  placeholder="Confirm Password"
-                  onChange={(e) => {
-                    setpasswordconfirmation_register(e.target.value);
-                  }}
-                  required
-                />
                 {errormsg && (
                   <p style={{ color: "red", fontSize: "12px" }}>{errormsg}</p>
                 )}
-                <button disabled={!isPasswordValid} className="login_input">
+                <button
+                  disabled={!isPasswordValid}
+                  className="login_input cursor-pointer"
+                >
                   REGISTER
                 </button>
 

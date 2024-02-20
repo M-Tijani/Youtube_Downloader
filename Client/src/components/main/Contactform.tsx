@@ -3,7 +3,7 @@ function Contactform() {
     <>
       <main className="box-holder max-w-[350px] md:max-w-[600px] duration-200 flex flex-col gap-3">
         <form
-          className=" w-full flex flex-col items-center justify-center gap-4"
+          className=" w-full flex flex-col items-center justify-center my-4 gap-4"
           action=""
         >
           <div>

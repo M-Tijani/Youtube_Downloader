@@ -26,6 +26,12 @@
   .login_links {
     @apply hover:text-100 text-sm hover:underline duration-200;
   }
+  .verifypas-checked {
+    @apply text-100 font-semibold;
+  }
+}
+.liverifypas {
+  display: none;
 }
 
 .app {
