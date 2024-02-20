@@ -1,14 +1,15 @@
-.liverifypas{
-    display: grid;
-    row-gap: 1rem;
-    grid-template-columns: 1fr 1fr;
-    font-size: 10px;
-    margin-left: 15px;
+.liverifypas {
+  /* display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: px;
+  margin-left: 15px; */
 }
-.liverifypas li{
-    list-style: disc;
+.liverifypas li {
+  display: flex;
+  list-style: disc;
 }
 .verifypas-checked {
-    color: green;
-    font-weight: bold;
-  }
+  color: green;
+  font-weight: bold;
+}
