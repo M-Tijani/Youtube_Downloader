@@ -27,3 +27,9 @@
     @apply hover:text-100 text-sm hover:underline duration-200;
   }
 }
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

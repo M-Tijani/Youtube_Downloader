@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { tsParticles } from "@tsparticles/engine";
+
 function Downloader() {
   return (
     <>
