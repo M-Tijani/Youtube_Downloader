@@ -11,7 +11,8 @@ function Loginrogister() {
   const [name_register, setname_register] = useState("");
   const [email_register, setemail_register] = useState("");
   const [password_register, setpassword_register] = useState("");
-  const [passwordconfirmation_register, setpasswordconfirmation_register] =useState("");
+  const [passwordconfirmation_register, setpasswordconfirmation_register] =
+    useState("");
   const [errormsg, seterrormsg] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [typepslogin, settypepslogin] = useState("password");
@@ -164,6 +165,10 @@ function Loginrogister() {
     }
   };
 
+  function setPassword(value: string): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <>
       <main className="box-holder duration-200 max-w-[350px] md:max-w-[500px] py-8 w-full flex flex-col gap-3">
@@ -201,7 +206,6 @@ function Loginrogister() {
                     type={typepslogin}
                     name="password"
                     placeholder="Password"
-                    
                     onChange={(e) => setPassword(e.target.value)}
                     autoComplete="current-password"
                   />
@@ -251,7 +255,7 @@ function Loginrogister() {
                   }}
                   required
                 />
-                <div className="relative w-full max-w-[350px] flex flex-col gap-3">
+                <div className="relative w-full max-w-[350px] flex flex-col ">
                   <input
                     className="input_style "
                     type={typepsresig}
@@ -283,7 +287,7 @@ function Loginrogister() {
                     <li className="verifypas3">Should contain uppercase.</li>
                   </ul>
                 </>
-                <div className="relative w-full max-w-[350px] flex flex-col gap-3">
+                <div className="relative w-full max-w-[350px] flex flex-col ">
                   <input
                     className="input_style "
                     type={typepsConfirmresig}

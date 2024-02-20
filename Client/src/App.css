@@ -15,7 +15,7 @@
     @apply hover:text-blue-400  duration-200;
   }
   .box-holder {
-    @apply container mx-auto my-10 max-w-[500px] gap-3 rounded-lg bg-200 flex flex-col items-center justify-center py-4 px-8;
+    @apply container mx-auto my-10 max-w-[500px] gap-3 shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-lg bg-200 flex flex-col items-center justify-center py-4 px-8;
   }
   .input_style {
     @apply border-none outline-none placeholder:text-slate-700 bg-300 py-2 px-4 rounded-lg ring-0 focus:ring-2 ring-100 duration-200 ease-in-out;
@@ -29,6 +29,13 @@
   .verifypas-checked {
     @apply text-100 font-semibold;
   }
+  /* Rep */
+  .text-box {
+    @apply font-semibold text-2xl md:text-4xl;
+  }
+  .text-p {
+    @apply text-justify md:text-lg;
+  }
 }
 .liverifypas {
   display: none;
@@ -38,5 +45,4 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-
 }
