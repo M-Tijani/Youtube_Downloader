@@ -27,12 +27,6 @@ function navbar_mobile() {
             </div>
             <DropdownMenu.Separator />
             <div className="menu_button">
-              <Link className="" to="/how-to-use">
-                HOW TO USE
-              </Link>
-            </div>
-            <DropdownMenu.Separator />
-            <div className="menu_button">
               <Link to="/contact">CONTACT US</Link>
             </div>
             <DropdownMenu.Separator />

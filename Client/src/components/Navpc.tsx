@@ -19,12 +19,6 @@ function Navpc() {
             </NavLink>
             <NavLink
               className="text-white text_style aria-[current=page]:text-blue-400"
-              to="/how-to-use"
-            >
-              HOW TO USE
-            </NavLink>
-            <NavLink
-              className="text-white text_style aria-[current=page]:text-blue-400"
               to="/contact"
             >
               CONTACT US
