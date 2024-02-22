@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <>
-      <main className="mt-auto bottom-0 right-0 left-0 bg-100">
+      <main className="mt-auto bottom-0 right-0 left-0 bg-501">
         <div className="flex flex-col items-start justify-start text-white gap-2 my-4 mx-10 / md:flex-row md:items-center md:justify-center md:gap-4 md:my-8 md:mx-16">
           <div className="flex flex-col gap-2 ">
             <Link className="text-2xl font-semibold " to="/">
@@ -30,7 +30,7 @@ function Footer() {
             </Link>
           </div>
         </div>
-        <div className="bg-101 text-white font-semibold flex justify-center py-2 items-center">
+        <div className="bg-502 text-white font-semibold flex justify-center py-2 items-center">
           <h1>@COPYRIGHT 2024 CREATE BY TUBELOAD</h1>
         </div>
       </main>

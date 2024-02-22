@@ -4,7 +4,7 @@ import Navpc from "../Navpc";
 function Header() {
   return (
     <>
-      <main>
+      <main className="">
         <div className="flex flex-col md:hidden">
           <Navmobile />
         </div>

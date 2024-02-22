@@ -37,7 +37,7 @@ function Contactform() {
           action=""
         >
           <div>
-            <h1 className="text-2xl font-semibold">CONTACT US</h1>
+            <h1 className="text-2xl text-white font-semibold">CONTACT US</h1>
           </div>
           <div className="w-full flex flex-col gap-3">
             <input
@@ -68,12 +68,12 @@ function Contactform() {
             <textarea
               value={emty4}
               onChange={(e) => setEmty4(e.target.value)}
-              className="border-none outline-none w-full h-[200px] placeholder:text-slate-700 bg-300 py-2 px-4 ring-0 focus:ring-2 rounded-lg ring-100 duration-200"
+              className="h-[200px] input_style"
               placeholder="What in mind"
               name="message"
               id=""
             ></textarea>
-            <button type="submit" value="Send" className="login_input">
+            <button type="submit" value="Send" className="dif_btn_style">
               SEND
             </button>
           </div>

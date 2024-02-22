@@ -59,10 +59,10 @@ function App() {
           },
           particles: {
             color: {
-              value: "#3742FA",
+              value: "#e02226",
             },
             links: {
-              color: "#252cdd",
+              color: "#fff",
               distance: 200,
               enable: true,
               opacity: 0.5,
