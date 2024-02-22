@@ -6,7 +6,7 @@ import Logo from "/src/assets/Tubeload White.png";
 
 function navbar_mobile() {
   return (
-    <header className="flex items-center justify-between px-4 py-4 bg-100 text-white">
+    <header className="flex items-center justify-between px-4 py-4 bg-501 text-white">
       <div>
         <Link className="text-2xl font-semibold" to="/">
           <img src={Logo} alt="" />
