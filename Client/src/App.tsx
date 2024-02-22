@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layouts/Layout";
 import Home from "./Pages/Home";
-import Howtouse from "./Pages/Howtouse";
 import Contact from "./Pages/Contact";
 import Loginrogister from "./Pages/Loginrogister";
 import Forgetpass from "./Pages/Forgetpass";
@@ -12,9 +11,10 @@ import Copyrights from "./Pages/Copyrights";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 import { useCallback } from "react";
+import { Engine } from "tsparticles-engine";
 
 function App() {
-  const particlesInit = useCallback(async (engine) => {
+  const particlesInit = useCallback(async (engine: Engine) => {
     console.log(engine);
     // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
     // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
@@ -23,7 +23,7 @@ function App() {
     await loadSlim(engine);
   }, []);
 
-  const particlesLoaded = useCallback(async (container) => {
+  const particlesLoaded = useCallback(async (container: any) => {
     await console.log(container);
   }, []);
 
