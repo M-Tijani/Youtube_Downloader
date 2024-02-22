@@ -1,5 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import Logo from "/src/assets/Tubeload White.png";
+import Darkmode from "./Darkmode";
 function Navpc() {
   return (
     <>
@@ -28,6 +29,7 @@ function Navpc() {
             <Link className="button_style" to="/Login-or-register">
               LOGIN / REGISTER
             </Link>
+            <Darkmode />
           </div>
         </div>
       </main>

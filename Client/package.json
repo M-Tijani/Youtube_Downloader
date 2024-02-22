@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.1.0",
     "@radix-ui/themes": "^2.0.3",
     "@tsparticles/all": "^3.2.1",
     "@tsparticles/react": "^3.0.0",
     "cra-template-particles": "^3.0.0",
+    "emailjs": "^4.0.3",
     "framer-motion": "^11.0.5",
     "preline": "^2.0.3",
     "react": "^18.2.0",
