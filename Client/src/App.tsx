@@ -13,7 +13,9 @@ import { loadSlim } from "tsparticles-slim";
 import { useCallback } from "react";
 import { Engine } from "tsparticles-engine";
 
+
 function App() {
+
   const particlesInit = useCallback(async (engine: Engine) => {
     console.log(engine);
     // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
@@ -29,6 +31,7 @@ function App() {
 
   return (
     <>
+
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -49,10 +52,10 @@ function App() {
             },
             modes: {
               push: {
-                quantity: 2,
+                quantity: 1,
               },
               repulse: {
-                distance: 200,
+                distance: 100,
                 duration: 0.4,
               },
             },

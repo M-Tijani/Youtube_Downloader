@@ -4,6 +4,7 @@ import $ from "jquery"; // You might need to install jQuery if not already insta
 import { Icon } from "@iconify/react";
 import BarLoader from "react-spinners/BarLoader";
 import "flowbite";
+import {ReactTyped} from 'react-typed'
 
 function Downloader() {
   const [searchInput, setSearchInput] = useState("");
@@ -12,6 +13,7 @@ function Downloader() {
   const [response, setResponse] = useState(null);
   const [searchLoading, setSearchLoading] = useState(false);
 
+  
   const k_url_search =
     "https://corsproxy.io/?" +
     encodeURIComponent("https://yt5s.io/api/ajaxSearch");
@@ -87,7 +89,13 @@ function Downloader() {
     <>
       <div className="flex flex-col items-center text-center justify-center text-white my-10 font-bold">
         <h1 className="text-2xl md:text-4xl lg:text-6xl">
-          <span className="text-600">YouTube :</span> Converter
+        
+          <ReactTyped  
+          strings ={["<span className='text-700' >Youtube</span>","<span className='text-100'>Facebook</span>"]}
+          typeSpeed={150}
+          backSpeed={150}
+          loop/>
+          Converter
         </h1>
         <h1 className="">
           The best free and fast YouTube converter in mp3, mp4 and other
