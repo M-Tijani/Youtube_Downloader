@@ -8,6 +8,7 @@ import Forgetpass from "./Pages/Forgetpass";
 import Privacypolicy from "./Pages/Privacypolicy";
 import Termsofuse from "./Pages/Termsofuse";
 import Copyrights from "./Pages/Copyrights";
+import History from "./Pages/History";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 import { useCallback } from "react";
@@ -108,6 +109,7 @@ function App() {
             <Route path="Privacy-policy" element={<Privacypolicy />} />
             <Route path="Terms-of-use" element={<Termsofuse />} />
             <Route path="Copyrights" element={<Copyrights />} />
+            <Route path="History" element={<History />} />
           </Route>
         </Routes>
       </BrowserRouter>

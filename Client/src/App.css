@@ -6,7 +6,7 @@
 
 @layer components {
   .menu_button {
-    @apply py-4 px-10 flex flex-col hover:bg-100 rounded-md shadow-md text-lg text-center text-100 hover:text-white font-semibold duration-200 ease-in-out;
+    @apply py-4 px-10 flex flex-col hover:bg-600 rounded-md shadow-md text-lg text-center text-600 hover:text-white font-semibold duration-200 ease-in-out;
   }
   .button_style {
     @apply py-4 px-10 bg-600 hover:bg-white text-white hover:text-600 font-semibold rounded-md shadow-md text-lg duration-200 ease-in-out;
