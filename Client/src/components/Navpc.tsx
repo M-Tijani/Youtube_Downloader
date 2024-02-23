@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import "../Css/Navpc.css";
 import Cookies from "js-cookie";
 import { DropdownMenu } from "@radix-ui/themes";
+import axios from 'axios';
 
 function Navpc() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -26,6 +27,7 @@ function Navpc() {
       setLoggedIn(true);
       getcardprofil(user);
     } else setLoggedIn(false);
+
   }, [""]);
 
   const getcardprofil = (credentialtxt: string) => {
@@ -48,7 +50,11 @@ function Navpc() {
   const GoogleLoginSuccess = (credentialResponse: any) => {
     const token = credentialResponse?.credential;
     getcardprofil(token);
-    // setCookie("credentialtxt", token);
+    axios.get("http://localhost:3000/adduser" , {
+      params: {
+        credential: token
+      }
+    });
   };
 
   return (
