@@ -1,56 +1,53 @@
-.profilimg{
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+/* .profilimg {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }
-.detailsinfo h2{
-    color: white;
-    font-size: 12px;
-    font-weight: 600;
+.detailsinfo h2 {
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
 }
-.detailsinfo p{
-    color: rgb(183, 183, 183);
-    font-size: 8px;
+.detailsinfo p {
+  color: rgb(183, 183, 183);
+  font-size: 8px;
 }
-.cardprofil{
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    cursor: pointer;
-    padding: .5rem;
-    border-radius: 15px;
-    box-shadow: 1px 1px 5px rgba(208, 208, 208, 0.367);
-   background-color: #23292dc2;
-
+.cardprofil {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px rgba(208, 208, 208, 0.367);
+  background-color: #23292dc2;
 }
-.cardprofil:hover{
-    box-shadow: 1px 1px 10px rgba(208, 208, 208, 0.367);
-
+.cardprofil:hover {
+  box-shadow: 1px 1px 10px rgba(208, 208, 208, 0.367);
 }
-.menupanel{
-    position: absolute;
-    background-color: aliceblue;
-    margin-left: -14px;
-    border-radius: 15px 0px 15px 15px;
-    margin-top: 150px;
-    width: 200px;
-    padding-top: 15px;
-    display: none;
-    flex-direction: column;
-    gap: .2rem;
-    transform: .2s;
-  
+.menupanel {
+  position: absolute;
+  background-color: aliceblue;
+  margin-left: -14px;
+  border-radius: 15px 0px 15px 15px;
+  margin-top: 150px;
+  width: 200px;
+  padding-top: 15px;
+  display: none;
+  flex-direction: column;
+  gap: 0.2rem;
+  transform: 0.2s;
 }
-.menupanel div{
-    padding: 0.6rem 0.8rem;
+.menupanel div {
+  padding: 0.6rem 0.8rem;
 }
-.menupanel div.logout:hover{
-    background-color: rgb(182, 182, 182);
-    border-radius: 0px 0px 15px 15px;
+.menupanel div.logout:hover {
+  background-color: rgb(182, 182, 182);
+  border-radius: 0px 0px 15px 15px;
 }
-.menupanel div.history:hover{
-    background-color: rgb(182, 182, 182);
+.menupanel div.history:hover {
+  background-color: rgb(182, 182, 182);
 }
-.IoIosArrowDown{
-    transition: .1s;
-}
+.IoIosArrowDown {
+  transition: 0.1s;
+} */

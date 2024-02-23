@@ -1,7 +1,7 @@
-function Termsofuse() {
+export default function Termsofuse() {
   return (
     <>
-      <main className="box-holder duration-200 max-w-[350px] md:max-w-[500px] py-8 w-full flex flex-col gap-3">
+      <main className="box-holder duration-200 max-w-[350px] md:max-w-[500px] py-8 w-full flex flex-col gap-3 text-white">
         <div className="text-box">
           <h1>Terms of use</h1>
         </div>
@@ -21,5 +21,3 @@ function Termsofuse() {
     </>
   );
 }
-
-export default Termsofuse;
