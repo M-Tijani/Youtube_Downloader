@@ -23,9 +23,15 @@ function Navpc() {
             >
               CONTACT US
             </NavLink>
+            <NavLink
+              className="text-white text_style aria-[current=page]:text-600"
+              to="/history"
+            >
+              HISTORY
+            </NavLink>
           </div>
           <div className="flex gap-4">
-            <Link className="button_style" to="/Login-or-register">
+            <Link className="button_style py-2 px-6" to="/Login-or-register">
               CONTINUE GOOGLE
             </Link>
           </div>
