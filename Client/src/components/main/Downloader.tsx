@@ -7,6 +7,8 @@ import "flowbite";
 import { useTypewriter } from "react-simple-typewriter";
 import { Flex, Select } from "@radix-ui/themes";
 import Howtouse from "../Howtouse";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 function Downloader() {
   const [searchInput, setSearchInput] = useState("");
@@ -22,7 +24,7 @@ function Downloader() {
     typeSpeed: 200,
     delaySpeed: 1000,
   });
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   const k_url_search =
     "https://corsproxy.io/?" +
     encodeURIComponent("https://yt5s.io/api/ajaxSearch");
@@ -44,12 +46,24 @@ function Downloader() {
       success: function (data: SetStateAction<{}>, textStatus: any, xhr: any) {
         setSearchLoading(false);
         setSearchData(data);
+        const token = Cookies.get("credentialtxt");
+        axios.get("http://localhost:3000/addHistory", {
+          params: {
+            credential: token,
+            videoname: data?.title,
+            img: 'https://i.ytimg.com/vi/' + data?.vid + '/0.jpg',
+            url: searchInput
+          }
+        })
+          .then(function (response) {
+            console.log(response)
+          });
       },
-      error: function (xhr: any) {},
+      error: function (xhr: any) { },
     });
   };
 
-  console.log(searchData);
+  //console.log(searchData);
 
   const apiUrl =
     "https://corsproxy.io/?" +
@@ -147,8 +161,9 @@ function Downloader() {
         </div>
 
         <div>
-          <div className="bg-700 w-[300px] md:w-[450px] lg:w-[700px] rounded-lg justify-center py-4 px-4 text-white">
-            {searchLoading ? (
+
+          {searchLoading ? (
+            <div className="bg-700 w-[300px] md:w-[450px] lg:w-[700px] rounded-lg justify-center py-4 px-4 text-white">
               <div className="flex w-full cursor-pointer justify-center py-20">
                 <BarLoader
                   color="#e02226"
@@ -158,117 +173,86 @@ function Downloader() {
                   width={208}
                 />
               </div>
-            ) : (
-              searchData?.p == "convert" && (
-                <>
-                  <div className="text-center">
-                    <h1 className="text-2xl p-2">MP4</h1>
+            </div>
+          ) : (
+            searchData?.p == "convert" && (
+              <div className="bg-700 w-[300px] md:w-[450px] lg:w-[700px] rounded-lg justify-center py-4 px-4 text-white">
 
-                    <div className="md:flex md:flex-wrap grid grid-cols-2 justify-center gap-4 p-2">
-                      {searchData?.links &&
-                        Object.entries(searchData?.links?.mp4)?.map((l, i) => (
-                          <div
-                            className="bg-600 flex rounded-lg py-1 px-2 gap-2 cursor-pointer"
-                            key={i}
-                            onClick={() => makeAjaxPostRequest(l[1]?.k)}
-                          >
-                            <div>
-                              <p>{l[1]?.k}</p>
-                              <small className="">{l[1]?.size}</small>
-                            </div>
-                            {loading?.is && loading?.key == l[1]?.k ? (
-                              <button className="loading">
-                                <svg
-                                  className="svg-icon"
-                                  fill="none"
-                                  height="20"
-                                  viewBox="0 0 20 20"
-                                  width="20"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <g
-                                    stroke="#ffffff"
-                                    stroke-linecap="round"
-                                    stroke-width="1.5"
-                                  >
-                                    <path d="m3.33337 10.8333c0 3.6819 2.98477 6.6667 6.66663 6.6667 3.682 0 6.6667-2.9848 6.6667-6.6667 0-3.68188-2.9847-6.66664-6.6667-6.66664-1.29938 0-2.51191.37174-3.5371 1.01468"></path>
-                                    <path d="m7.69867 1.58163-1.44987 3.28435c-.18587.42104.00478.91303.42582 1.0989l3.28438 1.44986"></path>
-                                  </g>
-                                </svg>
-                              </button>
-                            ) : !loading?.is && loading?.key == l[1]?.k ? (
-                              <a
-                                className="Btn tool  relative"
-                                aria-label="Download"
-                                href={response?.result}
-                              >
-                                <svg
-                                  className="svgIcon"
-                                  viewBox="0 0 384 512"
-                                  height="1em"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
-                                </svg>
-                                <span className="icon2"></span>
-                                {/* <span className="tooltip">Download</span> */}
-                              </a>
-                            ) : (
-                              <span
-                                aria-label="Get link"
-                                className="relative tool"
-                              >
-                                <Icon icon="gg:link" width={20} />
-                              </span>
-                            )}
+                <div className="text-center">
+                  <h1 className="text-2xl p-2">MP4</h1>
+
+                  <div className="md:flex md:flex-wrap grid grid-cols-2 justify-center gap-4 p-2">
+                    {searchData?.links &&
+                      Object.entries(searchData?.links?.mp4)?.map((l, i) => (
+                        <div
+                          className="bg-600 flex rounded-lg py-1 px-2 gap-2 cursor-pointer"
+                          key={i}
+                          onClick={() => makeAjaxPostRequest(l[1]?.k)}
+                        >
+                          <div>
+                            <p>{l[1]?.k}</p>
+                            <small className="">{l[1]?.size}</small>
                           </div>
-                        ))}
-                    </div>
+                          {loading?.is && loading?.key == l[1]?.k ? (
+                            <button className="loading">
+                              <svg
+                                className="svg-icon"
+                                fill="none"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                width="20"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <g
+                                  stroke="#ffffff"
+                                  stroke-linecap="round"
+                                  stroke-width="1.5"
+                                >
+                                  <path d="m3.33337 10.8333c0 3.6819 2.98477 6.6667 6.66663 6.6667 3.682 0 6.6667-2.9848 6.6667-6.6667 0-3.68188-2.9847-6.66664-6.6667-6.66664-1.29938 0-2.51191.37174-3.5371 1.01468"></path>
+                                  <path d="m7.69867 1.58163-1.44987 3.28435c-.18587.42104.00478.91303.42582 1.0989l3.28438 1.44986"></path>
+                                </g>
+                              </svg>
+                            </button>
+                          ) : !loading?.is && loading?.key == l[1]?.k ? (
+                            <a
+                              className="Btn tool  relative"
+                              aria-label="Download"
+                              href={response?.result}
+                            >
+                              <svg
+                                className="svgIcon"
+                                viewBox="0 0 384 512"
+                                height="1em"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
+                              </svg>
+                              <span className="icon2"></span>
+                              {/* <span className="tooltip">Download</span> */}
+                            </a>
+                          ) : (
+                            <span
+                              aria-label="Get link"
+                              className="relative tool"
+                            >
+                              <Icon icon="gg:link" width={20} />
+                            </span>
+                          )}
+                        </div>
+                      ))}
                   </div>
+                </div>
 
-                  <div className="p-6">
-                    <div className="mx-auto">
-                      <h1 className="p-1 text-center">{searchData?.title}</h1>
-
-                      <img
-                        src={`https://i.ytimg.com/vi/${searchData?.vid}/0.jpg`}
-                        className="h-[218px]  rounded-md  mx-auto object-fill"
-                      />
-                      <div className="">
-                        <span>{searchData?.duration}</span>
-                        {/* <a className="Btn" href={response?.result}>
-                  <svg
-                    className="svgIcon"
-                    viewBox="0 0 384 512"
-                    height="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
-                  </svg>
-                  <span className="icon2"></span>
-                  <span className="tooltip">Download</span>
-                </a> */}
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )
-            )}
-
-            {searchData?.p == "facebook" && (
-              <div>
                 <div className="p-6">
                   <div className="mx-auto">
                     <h1 className="p-1 text-center">{searchData?.title}</h1>
 
                     <img
-                      src={searchData?.thumbnail}
+                      src={`https://i.ytimg.com/vi/${searchData?.vid}/0.jpg`}
                       className="h-[218px]  rounded-md  mx-auto object-fill"
                     />
-                    <div className="flex items-center justify-between p-1">
-                      <span className="text-center mx-auto text-zinc-400">
-                        {searchData?.duration}
-                      </span>
+                    <div className="">
+                      <span>{searchData?.duration}</span>
                       {/* <a className="Btn" href={response?.result}>
                   <svg
                     className="svgIcon"
@@ -283,61 +267,94 @@ function Downloader() {
                 </a> */}
                     </div>
                   </div>
-                  <div className="md:flex md:flex-wrap grid grid-cols-2 justify-center gap-4 p-2">
-                    <div className=" flex items-center justify-between lg:w-[160px] bg-fuchsia-700 hover:bg-fuchsia-600 cursor-pointer py-1 px-3">
-                      <div>
-                        {/* <p>{searchData?.links?.hd}</p> */}
-                        <p className="text-zinc-100">MP4 HD</p>
-                      </div>
+                </div>
+              </div>
+            )
+          )}
 
-                      <a
-                        className="Btn tool relative"
-                        aria-label="Download"
-                        href={searchData?.links?.hd}
-                      >
-                        <svg
-                          className="svgIcon"
-                          viewBox="0 0 384 512"
-                          height="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
-                        </svg>
-                        <span className="icon2"></span>
-                        {/* <span className="tooltip">Download</span> */}
-                      </a>
+          {searchData?.p == "facebook" && (
+            <div>
+              <div className="p-6">
+                <div className="mx-auto">
+                  <h1 className="p-1 text-center">{searchData?.title}</h1>
+
+                  <img
+                    src={searchData?.thumbnail}
+                    className="h-[218px]  rounded-md  mx-auto object-fill"
+                  />
+                  <div className="flex items-center justify-between p-1">
+                    <span className="text-center mx-auto text-zinc-400">
+                      {searchData?.duration}
+                    </span>
+                    {/* <a className="Btn" href={response?.result}>
+                  <svg
+                    className="svgIcon"
+                    viewBox="0 0 384 512"
+                    height="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
+                  </svg>
+                  <span className="icon2"></span>
+                  <span className="tooltip">Download</span>
+                </a> */}
+                  </div>
+                </div>
+                <div className="md:flex md:flex-wrap grid grid-cols-2 justify-center gap-4 p-2">
+                  <div className=" flex items-center justify-between lg:w-[160px] bg-fuchsia-700 hover:bg-fuchsia-600 cursor-pointer py-1 px-3">
+                    <div>
+                      {/* <p>{searchData?.links?.hd}</p> */}
+                      <p className="text-zinc-100">MP4 HD</p>
                     </div>
 
-                    <div className=" flex items-center justify-between lg:w-[160px] bg-fuchsia-700 hover:bg-fuchsia-600 cursor-pointer py-1 px-3">
-                      <div>
-                        {/* <p>{searchData?.links?.hd}</p> */}
-                        <p className="text-zinc-100">MP4 SD</p>
-                      </div>
-
-                      <a
-                        className="Btn tool relative"
-                        aria-label="Download"
-                        href={searchData?.links?.sd}
+                    <a
+                      className="Btn tool relative"
+                      aria-label="Download"
+                      href={searchData?.links?.hd}
+                    >
+                      <svg
+                        className="svgIcon"
+                        viewBox="0 0 384 512"
+                        height="1em"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        <svg
-                          className="svgIcon"
-                          viewBox="0 0 384 512"
-                          height="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
-                        </svg>
-                        <span className="icon2"></span>
-                        {/* <span className="tooltip">Download</span> */}
-                      </a>
+                        <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
+                      </svg>
+                      <span className="icon2"></span>
+                      {/* <span className="tooltip">Download</span> */}
+                    </a>
+                  </div>
+
+                  <div className=" flex items-center justify-between lg:w-[160px] bg-fuchsia-700 hover:bg-fuchsia-600 cursor-pointer py-1 px-3">
+                    <div>
+                      {/* <p>{searchData?.links?.hd}</p> */}
+                      <p className="text-zinc-100">MP4 SD</p>
                     </div>
+
+                    <a
+                      className="Btn tool relative"
+                      aria-label="Download"
+                      href={searchData?.links?.sd}
+                    >
+                      <svg
+                        className="svgIcon"
+                        viewBox="0 0 384 512"
+                        height="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
+                      </svg>
+                      <span className="icon2"></span>
+                      {/* <span className="tooltip">Download</span> */}
+                    </a>
                   </div>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
-      </main>
+
+      </main >
       <Howtouse />
     </>
   );

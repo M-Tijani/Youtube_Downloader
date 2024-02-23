@@ -20,15 +20,75 @@ async function getdata() {
   return header;
 }
 
-app.get("/api", async (req, res) => {
-  try {
-    const headerData = await getdata();
-    res.json({ header: headerData });
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+app.get("/addHistory", async (req, res) => {
+  await client.connect();
+  const database = client.db('ytconverteurdb');
+  const collection = database.collection('users');
+
+  const { credential, url, img, videoname } = req.query;
+
+  const existingDocument = await collection.findOne({ credential: credential });
+
+  if (existingDocument) {
+    // Update the existing document with the new history entry
+    const historyObject = {
+      url: url || 'None',
+      img: img || '',
+      videoname: videoname || 'None'
+    };
+
+    await collection.updateOne(
+      { credential: credential },
+      { $push: { history: historyObject } }
+    );
+    res.json(existingDocument);
+  } else {
+    res.json({ "not done": "added" });
   }
 });
+
+
+app.get("/adduser", async (req, res) => {
+
+  await client.connect();
+
+  const { credential } = req.query;
+
+  const data = await client.db('ytconverteurdb')
+    .collection('users');
+
+  const user = await data.findOne({ credential: credential });
+
+  if (!user) {
+    await data.insertOne({
+      credential: credential,
+      history: [{
+        object: {
+          url: "",
+          img: "",
+          videoname: ""
+        }
+      }]
+    });
+    res.json({'done':'user added'})
+  }
+  else{
+    res.json({'no done':'Failed to add'})
+  }
+
+});
+
+app.get("/gethistory" , async(req , res)=>{
+  await client.connect();
+  const collections = await client.db("ytconverteurdb").collection('users');
+
+  const {credential} = req.query;
+  const existinguser = await collections.findOne({credential:credential})
+  if(existinguser)
+    res.json(existinguser)
+  else
+    res.json({'Error': 'Not found.'})
+}); 
 
 app.post('/register', async (req, res) => {
   try {
@@ -40,7 +100,7 @@ app.post('/register', async (req, res) => {
     if (!eml) return res.json({ "error": "Email is required" });
     if (!ps) return res.json({ "error": "Ps is required" });
 
-    const emailExist = await data.findOne({email : eml}) ;
+    const emailExist = await data.findOne({ email: eml });
 
     if (emailExist) {
       return res.json({ "error": "Email already exists" });
@@ -57,13 +117,16 @@ app.post('/register', async (req, res) => {
         }
       }
     });
-    res.json({ "operation": "done successfully" ,'newregister' :true })
+    res.json({ "operation": "done successfully", 'newregister': true })
   } catch (error) {
     console.log("Error fetching data:", error);
   }
 });
 const PORT = 3000;
 
+app.get('/api', (req, res) => {
+  res.json({ "czidhv": "cdsdv" })
+})
 app.listen(PORT, () => {
   console.log("done");
 });
