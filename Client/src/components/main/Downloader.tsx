@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import $ from "jquery"; // You might need to install jQuery if not already installed
 import { Icon } from "@iconify/react";
 import BarLoader from "react-spinners/BarLoader";
 import "flowbite";
 import { useTypewriter } from "react-simple-typewriter";
+import { Flex, Select } from "@radix-ui/themes";
+import Howtouse from "../Howtouse";
 
 function Downloader() {
   const [searchInput, setSearchInput] = useState("");
@@ -16,10 +18,11 @@ function Downloader() {
   // Type Righter //
   const [typeEffect] = useTypewriter({
     words: ["YOUTUBE :", "FACEBOOK :"],
-    loop: {},
+    loop: true,
     typeSpeed: 200,
     delaySpeed: 1000,
   });
+  useEffect(() => {}, []);
   const k_url_search =
     "https://corsproxy.io/?" +
     encodeURIComponent("https://yt5s.io/api/ajaxSearch");
@@ -38,11 +41,11 @@ function Downloader() {
         // Your loading logic here
         setSearchLoading(true);
       },
-      success: function (data, textStatus, xhr) {
+      success: function (data: SetStateAction<{}>, textStatus: any, xhr: any) {
         setSearchLoading(false);
         setSearchData(data);
       },
-      error: function (xhr) {},
+      error: function (xhr: any) {},
     });
   };
 
@@ -52,7 +55,7 @@ function Downloader() {
     "https://corsproxy.io/?" +
     encodeURIComponent("https://dt230.dlsnap01.xyz/api/json/convert");
 
-  const makeAjaxPostRequest = (q) => {
+  const makeAjaxPostRequest = (q: any) => {
     const payload = {
       v_id: searchData?.vid,
       ftype: "mp4",
@@ -70,7 +73,7 @@ function Downloader() {
         // Add any loading logic here
         setLoading({ is: true, key: q });
       },
-      success: function (response) {
+      success: function (response: any) {
         // Handle the response data here
         setLoading({ is: false, key: q });
         setResponse(response);
@@ -80,11 +83,13 @@ function Downloader() {
           setLoading({ is: true, key: q });
 
           setTimeout(() => {
-            makeAjaxPostRequest(q);
+            if (searchData?.vid) {
+              makeAjaxPostRequest(q);
+            }
           }, 1000);
         }
       },
-      error: function (error) {
+      error: function (error: any) {
         // Handle any errors here
         console.error("Error:", error);
       },
@@ -110,21 +115,24 @@ function Downloader() {
         <div className="flex flex-col md:flex md:flex-row gap-4">
           <div className="relative">
             <input
-              className="input_style placeholder:text-slate-700 w-[300px] lg:w-[500px]"
+              className="input_style  placeholder:text-slate-700 w-[300px] lg:w-[500px]"
               type="sreach"
               placeholder="Video Link"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
             />
             <div className="absolute top-[5px] right-[7px]">
-              <div className="cursor-pointer py-1 px-30 rounded-md">
-                <form className="max-w-sm mx-auto">
-                  <select className="outline-none bg-transparent text-500">
-                    <option selected>MP4</option>
-                    <option value="US">MP3</option>
-                  </select>
-                </form>
-              </div>
+              <Flex gap="3">
+                <Select.Root defaultValue="mp4">
+                  <Select.Trigger radius="large" />
+                  <Select.Content color="red">
+                    <Select.Group color="red">
+                      <Select.Item value="mp3">MP3</Select.Item>
+                      <Select.Item value="mp4">MP4</Select.Item>
+                    </Select.Group>
+                  </Select.Content>
+                </Select.Root>
+              </Flex>
             </div>
           </div>
 
@@ -141,7 +149,7 @@ function Downloader() {
         <div>
           <div className="bg-700 w-[300px] md:w-[450px] lg:w-[700px] rounded-lg justify-center py-4 px-4 text-white">
             {searchLoading ? (
-              <div className="flex w-full justify-center py-20">
+              <div className="flex w-full cursor-pointer justify-center py-20">
                 <BarLoader
                   color="#e02226"
                   height={5}
@@ -160,7 +168,7 @@ function Downloader() {
                       {searchData?.links &&
                         Object.entries(searchData?.links?.mp4)?.map((l, i) => (
                           <div
-                            className="flex items-center justify-center gap-2 bg-600 py-2 px-4 rounded-lg ring-0 focus:ring-2 ring-100 duration-200"
+                            className="bg-600 flex rounded-lg py-1 px-2 gap-2 cursor-pointer"
                             key={i}
                             onClick={() => makeAjaxPostRequest(l[1]?.k)}
                           >
@@ -330,6 +338,7 @@ function Downloader() {
           </div>
         </div>
       </main>
+      <Howtouse />
     </>
   );
 }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Copyrights() {
   return (
     <>
-      <main className="box-holder max-w-[350px] md:max-w-[600px] duration-200 flex flex-col gap-3">
+      <main className="box-holder max-w-[350px] md:max-w-[600px] duration-200 flex flex-col gap-3 text-white">
         <div className="text-box">
           <h1>Copyright Policy</h1>
         </div>
