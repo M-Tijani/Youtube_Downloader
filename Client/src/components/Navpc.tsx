@@ -9,7 +9,6 @@ import {
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import "../Css/Navpc.css";
-import { IoIosArrowDown } from "react-icons/io";
 import Cookies from "js-cookie";
 import { DropdownMenu } from "@radix-ui/themes";
 

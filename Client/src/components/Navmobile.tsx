@@ -48,7 +48,7 @@ function navbar_mobile() {
   const GoogleLoginSuccess = (credentialResponse: any) => {
     const token = credentialResponse?.credential;
     getcardprofil(token);
-    setCookie("credentialtxt", token);
+    // setCookie("credentialtxt", token);
   };
   return (
     <>
