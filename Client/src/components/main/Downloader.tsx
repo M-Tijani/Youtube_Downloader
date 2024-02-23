@@ -1,4 +1,6 @@
+//@ts-nocheck
 import { motion } from "framer-motion";
+
 import { SetStateAction, useEffect, useState } from "react";
 import $ from "jquery"; // You might need to install jQuery if not already installed
 import { Icon } from "@iconify/react";
@@ -43,7 +45,7 @@ function Downloader() {
         // Your loading logic here
         setSearchLoading(true);
       },
-      success: function (data: SetStateAction<{}>, textStatus: any, xhr: any) {
+      success: function (data) {
         setSearchLoading(false);
         setSearchData(data);
         const token = Cookies.get("credentialtxt");
@@ -59,7 +61,6 @@ function Downloader() {
             console.log(response)
           });
       },
-      error: function (xhr: any) { },
     });
   };
 
@@ -69,7 +70,7 @@ function Downloader() {
     "https://corsproxy.io/?" +
     encodeURIComponent("https://dt230.dlsnap01.xyz/api/json/convert");
 
-  const makeAjaxPostRequest = (q: any) => {
+  const makeAjaxPostRequest = (q) => {
     const payload = {
       v_id: searchData?.vid,
       ftype: "mp4",
@@ -87,7 +88,7 @@ function Downloader() {
         // Add any loading logic here
         setLoading({ is: true, key: q });
       },
-      success: function (response: any) {
+      success: function (response) {
         // Handle the response data here
         setLoading({ is: false, key: q });
         setResponse(response);
@@ -103,7 +104,7 @@ function Downloader() {
           }, 1000);
         }
       },
-      error: function (error: any) {
+      error: function (error) {
         // Handle any errors here
         console.error("Error:", error);
       },
