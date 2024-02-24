@@ -143,7 +143,9 @@ function Downloader() {
                   <Select.Trigger radius="large" />
                   <Select.Content color="red">
                     <Select.Group color="red">
-                      <Select.Item value="mp3">MP3</Select.Item>
+                      <Select.Item value="mp3" disabled>
+                        MP3
+                      </Select.Item>
                       <Select.Item value="mp4">MP4</Select.Item>
                     </Select.Group>
                   </Select.Content>

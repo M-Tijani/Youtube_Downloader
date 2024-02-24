@@ -100,7 +100,7 @@ function Navpc() {
                         </div>
                         <div className="button_style py-2">
                           <NavLink to="/History">
-                            <div className="history">History</div>
+                            <div>History</div>
                           </NavLink>
                         </div>
                         <DropdownMenu.Separator />

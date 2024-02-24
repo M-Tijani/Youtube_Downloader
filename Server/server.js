@@ -59,15 +59,7 @@ app.get("/adduser", async (req, res) => {
   if (!user) {
     await data.insertOne({
       credential: credential,
-      history: [
-        {
-          object: {
-            url: "",
-            img: "",
-            videoname: "",
-          },
-        },
-      ],
+      history: [],
     });
     res.json({ done: "user added" });
   } else {

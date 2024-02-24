@@ -35,15 +35,19 @@ function History() {
         {history &&
           history.map((item, i) => (
             <>
-              <Link to={item.url}>
-                <div className="flex items-start justify-between gap-4 text-white">
-                  <img
-                    className="w-[120px] md:w-[150px] border-[4px] rounded-lg border-600"
-                    src={item.img}
-                    alt=""
-                  />
-                  <div className="flex flex-col gap-1">
-                    <h1 className="text-sm md:text-lg">{item.videoname}</h1>
+              <Link target="new" to={item.url}>
+                <div className="container mx-auto flex justify-center text-white">
+                  <div className="w-full">
+                    <img
+                      className="w-[120px] md:w-[150px] border-[4px] rounded-lg border-600"
+                      src={item.img}
+                      alt=""
+                    />
+                  </div>
+                  <div className="container mx-auto flex  flex-col gap-2">
+                    <h1 className=" text-[12px] md:text-lg text-ellipsis">
+                      {item.videoname}
+                    </h1>
                     <h1>MP4</h1>
                   </div>
                 </div>
