@@ -61,7 +61,7 @@ app.get("/adduser", async (req, res) => {
       credential: credential,
       history: [],
     });
-    res.json({ done: "user added" });
+   res.json({ 'Done': result.insertedId });
   } else {
     res.json({ "no done": "Failed to add" });
   }
