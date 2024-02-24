@@ -5,6 +5,7 @@ export default function Termsofuse() {
         <div className="text-box">
           <h1>Terms of use</h1>
         </div>
+        <span className="w-full h-1 rounded-md bg-600"></span>
         <div>
           <p className="text-p">
             This website exists to promote civil liberties towards the fair

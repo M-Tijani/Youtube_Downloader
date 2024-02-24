@@ -26,7 +26,7 @@ function Downloader() {
     typeSpeed: 200,
     delaySpeed: 1000,
   });
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
   const k_url_search =
     "https://corsproxy.io/?" +
     encodeURIComponent("https://yt5s.io/api/ajaxSearch");
@@ -49,16 +49,17 @@ function Downloader() {
         setSearchLoading(false);
         setSearchData(data);
         const token = Cookies.get("credentialtxt");
-        axios.get("http://localhost:3000/addHistory", {
-          params: {
-            credential: token,
-            videoname: data?.title,
-            img: 'https://i.ytimg.com/vi/' + data?.vid + '/0.jpg',
-            url: searchInput
-          }
-        })
+        axios
+          .get("http://localhost:3000/addHistory", {
+            params: {
+              credential: token,
+              videoname: data?.title,
+              img: "https://i.ytimg.com/vi/" + data?.vid + "/0.jpg",
+              url: searchInput,
+            },
+          })
           .then(function (response) {
-            console.log(response)
+            console.log(response);
           });
       },
     });
@@ -132,7 +133,7 @@ function Downloader() {
             <input
               className="input_style  placeholder:text-slate-700 w-[300px] lg:w-[500px]"
               type="sreach"
-              placeholder="Video Link"
+              placeholder="Paste Video Link"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
             />
@@ -162,7 +163,6 @@ function Downloader() {
         </div>
 
         <div>
-
           {searchLoading ? (
             <div className="bg-700 w-[300px] md:w-[450px] lg:w-[700px] rounded-lg justify-center py-4 px-4 text-white">
               <div className="flex w-full cursor-pointer justify-center py-20">
@@ -178,7 +178,6 @@ function Downloader() {
           ) : (
             searchData?.p == "convert" && (
               <div className="bg-700 w-[300px] md:w-[450px] lg:w-[700px] rounded-lg justify-center py-4 px-4 text-white">
-
                 <div className="text-center">
                   <h1 className="text-2xl p-2">MP4</h1>
 
@@ -216,7 +215,7 @@ function Downloader() {
                             </button>
                           ) : !loading?.is && loading?.key == l[1]?.k ? (
                             <a
-                              className="Btn tool  relative"
+                              className="Btn tool flex items-center relative"
                               aria-label="Download"
                               href={response?.result}
                             >
@@ -354,8 +353,7 @@ function Downloader() {
             </div>
           )}
         </div>
-
-      </main >
+      </main>
       <Howtouse />
     </>
   );

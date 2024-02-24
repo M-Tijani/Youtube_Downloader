@@ -5,6 +5,7 @@ export default function Privacypolicy() {
         <div className="text-box">
           <h1>Privacy Policy</h1>
         </div>
+        <span className="w-full h-1 rounded-md bg-600"></span>
         <div>
           <p className="text-p">
             TubeLoad doesn't collect any data from its users. Your visit is 100%
