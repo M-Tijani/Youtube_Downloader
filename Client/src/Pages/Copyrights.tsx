@@ -7,6 +7,7 @@ function Copyrights() {
         <div className="text-box">
           <h1>Copyright Policy</h1>
         </div>
+        <span className="w-full h-1 rounded-md bg-600"></span>
         <div>
           <p className="text-p">
             We are against media owners and distributors limiting other people's
