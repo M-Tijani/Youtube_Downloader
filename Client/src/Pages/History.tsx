@@ -10,7 +10,7 @@ function History() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/gethistory", {
+      .get("https://youtube-downloader-1.onrender.com/gethistory", {
         params: {
           credential: Cookies.get("credentialtxt"),
         },

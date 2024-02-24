@@ -59,58 +59,7 @@ function navbar_mobile() {
           </Link>
         </div>
 
-        <div className="flex items-center gap-2">
-          <div>
-            <GoogleOAuthProvider clientId="347025856432-g5s8g8750kdm1klmfhdeqt4hpi8tun23.apps.googleusercontent.com">
-              {loggedIn ? (
-                <>
-                  <div>
-                    <DropdownMenu.Root>
-                      <DropdownMenu.Trigger>
-                        <img
-                          className="flex rounded-full w-[38px] cursor-pointer"
-                          src={userInfo.profileImage}
-                          alt=""
-                        />
-                      </DropdownMenu.Trigger>
-                      <DropdownMenu.Content sideOffset={30}>
-                        <div className="flex flex-col my-2 items-center">
-                          <h1 className="text-xl font-semibold">
-                            {userInfo.name}
-                          </h1>
-                        </div>
-                        <div className="button_style py-2">
-                          <NavLink to="/History">
-                            <div className="history">History</div>
-                          </NavLink>
-                        </div>
-                        <DropdownMenu.Separator />
-                        <div>
-                          <div
-                            className="button_style py-2 cursor-pointer logout"
-                            onClick={() => {
-                              googleLogout();
-                              Cookies.remove("credentialtxt");
-                              setLoggedIn(false);
-                            }}
-                          >
-                            Log out
-                          </div>
-                        </div>
-                      </DropdownMenu.Content>
-                    </DropdownMenu.Root>
-                  </div>
-                </>
-              ) : (
-                <GoogleLogin
-                  onSuccess={GoogleLoginSuccess}
-                  onError={() => {
-                    console.log("Login Failed");
-                  }}
-                />
-              )}
-            </GoogleOAuthProvider>
-          </div>
+        <div className="flex items-center justify-center gap-2">
           <DropdownMenu.Root>
             <DropdownMenu.Trigger>
               <Button variant="soft">
@@ -126,6 +75,58 @@ function navbar_mobile() {
               <DropdownMenu.Separator />
               <div className="menu_button py-2 px-6">
                 <Link to="/contact">CONTACT US</Link>
+              </div>
+              <DropdownMenu.Separator />
+              <div className="flex items-center justify-center">
+                <GoogleOAuthProvider clientId="347025856432-g5s8g8750kdm1klmfhdeqt4hpi8tun23.apps.googleusercontent.com">
+                  {loggedIn ? (
+                    <>
+                      <div>
+                        <DropdownMenu.Root>
+                          <DropdownMenu.Trigger>
+                            <img
+                              className="flex rounded-full w-[38px] cursor-pointer"
+                              src={userInfo.profileImage}
+                              alt=""
+                            />
+                          </DropdownMenu.Trigger>
+                          <DropdownMenu.Content sideOffset={30}>
+                            <div className="flex flex-col my-2 items-center">
+                              <h1 className="text-xl font-semibold">
+                                {userInfo.name}
+                              </h1>
+                            </div>
+                            <div className="button_style py-2">
+                              <NavLink to="/History">
+                                <div className="history">History</div>
+                              </NavLink>
+                            </div>
+                            <DropdownMenu.Separator />
+                            <div>
+                              <div
+                                className="button_style py-2 cursor-pointer logout"
+                                onClick={() => {
+                                  googleLogout();
+                                  Cookies.remove("credentialtxt");
+                                  setLoggedIn(false);
+                                }}
+                              >
+                                Log out
+                              </div>
+                            </div>
+                          </DropdownMenu.Content>
+                        </DropdownMenu.Root>
+                      </div>
+                    </>
+                  ) : (
+                    <GoogleLogin
+                      onSuccess={GoogleLoginSuccess}
+                      onError={() => {
+                        console.log("Login Failed");
+                      }}
+                    />
+                  )}
+                </GoogleOAuthProvider>
               </div>
             </DropdownMenu.Content>
           </DropdownMenu.Root>
