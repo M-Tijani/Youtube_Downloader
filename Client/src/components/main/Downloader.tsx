@@ -50,7 +50,7 @@ function Downloader() {
         setSearchData(data);
         const token = Cookies.get("credentialtxt");
         axios
-          .get("http://localhost:3000/addHistory", {
+          .get("https://youtube-downloader-1.onrender.com/addHistory", {
             params: {
               credential: token,
               videoname: data?.title,

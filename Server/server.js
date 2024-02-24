@@ -22,8 +22,8 @@ async function getdata() {
 
 app.get("/addHistory", async (req, res) => {
   await client.connect();
-  const database = client.db('ytconverteurdb');
-  const collection = database.collection('users');
+  const database = client.db("ytconverteurdb");
+  const collection = database.collection("users");
 
   const { credential, url, img, videoname } = req.query;
 
@@ -32,9 +32,9 @@ app.get("/addHistory", async (req, res) => {
   if (existingDocument) {
     // Update the existing document with the new history entry
     const historyObject = {
-      url: url || 'None',
-      img: img || '',
-      videoname: videoname || 'None'
+      url: url || "None",
+      img: img || "",
+      videoname: videoname || "None",
     };
 
     await collection.updateOne(
@@ -47,63 +47,57 @@ app.get("/addHistory", async (req, res) => {
   }
 });
 
-
 app.get("/adduser", async (req, res) => {
-
   await client.connect();
 
   const { credential } = req.query;
 
-  const data = await client.db('ytconverteurdb')
-    .collection('users');
+  const data = await client.db("ytconverteurdb").collection("users");
 
   const user = await data.findOne({ credential: credential });
 
   if (!user) {
     await data.insertOne({
       credential: credential,
-      history: [{
-        object: {
-          url: "",
-          img: "",
-          videoname: ""
-        }
-      }]
+      history: [
+        {
+          object: {
+            url: "",
+            img: "",
+            videoname: "",
+          },
+        },
+      ],
     });
-    res.json({'done':'user added'})
+    res.json({ done: "user added" });
+  } else {
+    res.json({ "no done": "Failed to add" });
   }
-  else{
-    res.json({'no done':'Failed to add'})
-  }
-
 });
 
-app.get("/gethistory" , async(req , res)=>{
+app.get("/gethistory", async (req, res) => {
   await client.connect();
-  const collections = await client.db("ytconverteurdb").collection('users');
+  const collections = await client.db("ytconverteurdb").collection("users");
 
-  const {credential} = req.query;
-  const existinguser = await collections.findOne({credential:credential})
-  if(existinguser)
-    res.json(existinguser)
-  else
-    res.json({'Error': 'Not found.'})
-}); 
+  const { credential } = req.query;
+  const existinguser = await collections.findOne({ credential: credential });
+  if (existinguser) res.json(existinguser);
+  else res.json({ Error: "Not found." });
+});
 
-app.post('/register', async (req, res) => {
+app.post("/register", async (req, res) => {
   try {
     const { nm, eml, ps } = req.body;
 
-    const data = await client.db('ytconverteurdb')
-      .collection('user');
-    if (!nm) return res.json({ "error": "Name is required" });
-    if (!eml) return res.json({ "error": "Email is required" });
-    if (!ps) return res.json({ "error": "Ps is required" });
+    const data = await client.db("ytconverteurdb").collection("user");
+    if (!nm) return res.json({ error: "Name is required" });
+    if (!eml) return res.json({ error: "Email is required" });
+    if (!ps) return res.json({ error: "Ps is required" });
 
     const emailExist = await data.findOne({ email: eml });
 
     if (emailExist) {
-      return res.json({ "error": "Email already exists" });
+      return res.json({ error: "Email already exists" });
     }
 
     await data.insertOne({
@@ -113,20 +107,20 @@ app.post('/register', async (req, res) => {
       downloadlimit: {
         object: {
           date: new Date(),
-          num: 0
-        }
-      }
+          num: 0,
+        },
+      },
     });
-    res.json({ "operation": "done successfully", 'newregister': true })
+    res.json({ operation: "done successfully", newregister: true });
   } catch (error) {
     console.log("Error fetching data:", error);
   }
 });
 const PORT = 3000;
 
-app.get('/api', (req, res) => {
-  res.json({ "czidhv": "cdsdv" })
-})
+app.get("/api", (req, res) => {
+  res.json({ czidhv: "cdsdv" });
+});
 app.listen(PORT, () => {
   console.log("done");
 });

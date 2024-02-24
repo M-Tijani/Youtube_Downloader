@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import "../Css/Navpc.css";
 import Cookies from "js-cookie";
 import { DropdownMenu } from "@radix-ui/themes";
-import axios from 'axios';
+import axios from "axios";
 
 function Navpc() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -27,7 +27,6 @@ function Navpc() {
       setLoggedIn(true);
       getcardprofil(user);
     } else setLoggedIn(false);
-
   }, [""]);
 
   const getcardprofil = (credentialtxt: string) => {
@@ -50,10 +49,10 @@ function Navpc() {
   const GoogleLoginSuccess = (credentialResponse: any) => {
     const token = credentialResponse?.credential;
     getcardprofil(token);
-    axios.get("http://localhost:3000/adduser" , {
+    axios.get("https://youtube-downloader-1.onrender.com/adduser", {
       params: {
-        credential: token
-      }
+        credential: token,
+      },
     });
   };
 
@@ -120,40 +119,6 @@ function Navpc() {
                       </DropdownMenu.Content>
                     </DropdownMenu.Root>
                   </div>
-                  {/* <div className="cardprofil" onClick={openmenucard}>
-                    <img
-                      className="profilimg"
-                      src={userInfo.profileImage}
-                      alt="User Profile"
-                    />
-                    <div className="detailsinfo">
-                      <h2>{userInfo.name}</h2>
-                      <p>{userInfo.email}</p>
-                    </div>
-                    <IoIosArrowDown
-                      className="IoIosArrowDown"
-                      style={{
-                        fontSize: "22px",
-                        color: "#f8f8f8",
-                        marginRight: "5px",
-                      }}
-                    />
-                    <div className="menupanel">
-                      <NavLink to="/History">
-                        <div className="history">History</div>
-                      </NavLink>
-                      <div
-                        className="logout"
-                        onClick={() => {
-                          googleLogout();
-                          Cookies.remove("credentialtxt");
-                          setLoggedIn(false);
-                        }}
-                      >
-                        Log out
-                      </div>
-                    </div>
-                  </div> */}
                 </>
               ) : (
                 <GoogleLogin
