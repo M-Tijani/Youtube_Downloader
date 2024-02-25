@@ -48,7 +48,7 @@ function Navpc() {
       if(check){
         axios.get("https://youtube-downloader-l5n5.onrender.com/adduser",{
           params:{
-            credential :decoded ,
+            credential :credentialtxt ,
             email :userEmail
           }
         })
