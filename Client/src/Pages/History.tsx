@@ -4,19 +4,22 @@ import Image from "/src/assets/image.jpg";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import ReactPaginate from 'react-paginate';
+import ReactDOM from 'react-dom';
+import Pagination  from '@mui/material/usePagination';
 
 function History() {
   const [history, sethistory] = useState([]);
 
   useEffect(() => {
     axios
-      .get("https://youtube-downloader-1.onrender.com/gethistory", {
+      .get("https://youtube-downloader-l5n5.onrender.com/gethistory", {
         params: {
-          credential: Cookies.get("credentialtxt"),
+          email: Cookies.get("emailuser")
         },
       })
       .then((response) => {
-        console.log(response.data.history);
+        console.log(response.data);
         sethistory(response.data.history);
       });
   }, []);
@@ -32,23 +35,13 @@ function History() {
           </div>
           <span className="w-full h-1 rounded-md bg-600"></span>
         </div>
-        {history &&
+        {history.length === 0 ?(
+          <><h1 style={{fontSize:"50px" , color:'white'}}>No found</h1></>
+        ):(
           history.map((item, i) => (
-            <>
-              <Link target="new" to={item.url}>
+            <Link target="new" to={item.url} key={i}>
 
-                <div className="container mx-auto flex justify-center text-white">
-                  <div className="w-full">
-                    <img
-                      className="w-[120px] md:w-[150px] border-[4px] rounded-lg border-600"
-                      src={item.img}
-                      alt=""
-                    />
-                  </div>
-                  <div className="container mx-auto flex  flex-col gap-2">
-                    <h1 className=" text-[12px] md:text-lg text-ellipsis">
-                      {item.videoname}
-                    </h1>
+              <div className="container mx-auto flex justify-center text-white">
 
                 <div className="flex items-start justify-between gap-4 text-white">
                   <img
@@ -62,11 +55,22 @@ function History() {
                     <h1>MP4</h1>
                   </div>
                 </div>
-              </Link>
-            </>
-          ))}
+              </div>
+            </Link>
+          ))
+        )
+         
+        }
+        <Pagination count={10} shape="rounded" />
+
       </main>
     </>
+
+
+
+
+
+
   );
 }
 

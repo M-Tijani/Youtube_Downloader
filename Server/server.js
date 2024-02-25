@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { ObjectId , MongoClient } = require("mongodb");
 const express = require("express");
 const app = express();
 
@@ -25,56 +25,71 @@ app.get("/addHistory", async (req, res) => {
   const database = client.db("ytconverteurdb");
   const collection = database.collection("users");
 
-  const { credential, url, img, videoname } = req.query;
+  const { credential,email, url, img, videoname } = req.query;
 
-  const existingDocument = await collection.findOne({ credential: credential });
-
-  if (existingDocument) {
-    // Update the existing document with the new history entry
-    const historyObject = {
-      url: url || "None",
-      img: img || "",
-      videoname: videoname || "None",
-    };
-
-    await collection.updateOne(
-      { credential: credential },
-      { $push: { history: historyObject } }
-    );
-    res.json(existingDocument);
-  } else {
-    res.json({ "not done": "added" });
+  if (!credential || !email || !url || !img || !videoname) {
+    res.status(400).json({ error: 'Missing required parameters' });
+    return; // Return to exit the function and prevent further execution
   }
+
+    const existingDocument = await collection.findOne({ email: email });
+
+    if (existingDocument) {
+      // Update the existing document with the new history entry
+      const historyObject = {
+        url: url || "None",
+        img: img || "",
+        videoname: videoname || "None",
+      };
+  
+      await collection.updateOne(
+        { credential: credential },
+        { $push: { history: historyObject } }
+      );
+      res.json(existingDocument);
+    } else {
+      res.json({ "not done": "added" });
+    }
+
+
 });
 
 app.get("/adduser", async (req, res) => {
   await client.connect();
 
-  const { credential } = req.query;
+  const { credential ,email} = req.query;
 
-  const data = await client.db("ytconverteurdb").collection("users");
+  const data = client.db("ytconverteurdb").collection("users");
 
-  const user = await data.findOne({ credential: credential });
+  const user = await data.findOne({ email: email });
 
   if (!user) {
+    const customId = new ObjectId();
     await data.insertOne({
+      _id:customId,
       credential: credential,
+      email:email,
       history: [],
     });
-   res.json({ 'Done': result.insertedId });
+   res.json({ '_id': customId });
   } else {
-    res.json({ "no done": "Failed to add" });
+    res.json({ "Error": "Failed to add" });
   }
+ 
 });
 
-app.get("/gethistory", async (req, res) => {
-  await client.connect();
+app.get("/gethistory",async (req, res) => {
+   client.connect();
   const collections = await client.db("ytconverteurdb").collection("users");
 
-  const { credential } = req.query;
-  const existinguser = await collections.findOne({ credential: credential });
-  if (existinguser) res.json(existinguser);
-  else res.json({ Error: "Not found." });
+  const { email } = req.query;
+  if(email){
+    const existinguser =  await collections.findOne({ email: email });
+    if (existinguser) res.json(existinguser);
+    else res.json({ "Error": "Not found." });
+  }else{
+    res.json({ "Error": "Missing attribute" });
+  }
 });
 
 app.post("/register", async (req, res) => {
@@ -108,9 +123,9 @@ app.post("/register", async (req, res) => {
     console.log("Error fetching data:", error);
   }
 });
-const PORT = 3000;
+const PORT = 3200;
 
-app.get("/api", (req, res) => {
+app.get("/test", (req, res) => {
   res.json({ czidhv: "cdsdv" });
 });
 app.listen(PORT, () => {

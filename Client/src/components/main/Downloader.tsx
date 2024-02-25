@@ -49,10 +49,11 @@ function Downloader() {
         setSearchLoading(false);
         setSearchData(data);
         const token = Cookies.get("credentialtxt");
-        axios
-          .get("https://youtube-downloader-1.onrender.com/addHistory", {
+        const emailuser = Cookies.get("emailuser");
+        axios.get("https://youtube-downloader-l5n5.onrender.com/addHistory", {
             params: {
               credential: token,
+              email:emailuser,
               videoname: data?.title,
               img: "https://i.ytimg.com/vi/" + data?.vid + "/0.jpg",
               url: searchInput,

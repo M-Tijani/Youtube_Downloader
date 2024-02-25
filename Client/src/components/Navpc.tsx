@@ -43,17 +43,20 @@ function Navpc() {
       });
       setLoggedIn(true);
       Cookies.set("credentialtxt", credentialtxt);
+      Cookies.set("emailuser", userEmail);
     }
   };
 
   const GoogleLoginSuccess = (credentialResponse: any) => {
     const token = credentialResponse?.credential;
     getcardprofil(token);
-    axios.get("https://youtube-downloader-1.onrender.com/adduser", {
-      params: {
-        credential: token,
-      },
-    });
+    const decoded: any = jwtDecode(token);
+    axios.get("https://youtube-downloader-l5n5.onrender.com/adduser",{
+      params:{
+        credential :token ,
+        email :decoded?.email
+      }
+    })
   };
 
   return (
