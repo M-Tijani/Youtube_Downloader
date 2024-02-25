@@ -25,11 +25,11 @@ function Navpc() {
     const user = Cookies.get("credentialtxt");
     if (user !== undefined) {
       setLoggedIn(true);
-      getcardprofil(user);
+      getcardprofil(user ,false);
     } else setLoggedIn(false);
   }, [""]);
 
-  const getcardprofil = (credentialtxt: string) => {
+  const getcardprofil = (credentialtxt: string , check :boolean) => {
     const decoded: any = jwtDecode(credentialtxt);
     if (decoded) {
       const userName = decoded?.name || "Unknown";
@@ -44,19 +44,21 @@ function Navpc() {
       setLoggedIn(true);
       Cookies.set("credentialtxt", credentialtxt);
       Cookies.set("emailuser", userEmail);
+
+      if(check){
+        axios.get("https://youtube-downloader-l5n5.onrender.com/adduser",{
+          params:{
+            credential :decoded ,
+            email :userEmail
+          }
+        })
+      }
     }
   };
 
   const GoogleLoginSuccess = (credentialResponse: any) => {
     const token = credentialResponse?.credential;
-    getcardprofil(token);
-    const decoded: any = jwtDecode(token);
-    axios.get("https://youtube-downloader-l5n5.onrender.com/adduser",{
-      params:{
-        credential :token ,
-        email :decoded?.email
-      }
-    })
+    getcardprofil(token , true);
   };
 
   return (
